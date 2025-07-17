@@ -3,6 +3,7 @@ module github.com/nerfthisdev/backend-test-task
 go 1.24.4
 
 require (
+	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.7.5
 	go.uber.org/zap v1.27.0
 	gopkg.in/yaml.v3 v3.0.1

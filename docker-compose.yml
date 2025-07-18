@@ -29,6 +29,8 @@ services:
         condition: service_healthy
     ports:
       - "3000:${HTTP_PORT}"
+    volumes:
+      - ./:/app
     restart: always
 
 volumes:

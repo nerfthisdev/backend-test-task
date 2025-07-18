@@ -40,5 +40,5 @@ func main() {
 
 	logger.Info("successfully connected to db")
 
-	dbpool.Close()
+	defer dbpool.Close()
 }

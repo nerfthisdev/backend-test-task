@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"net/http"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -33,7 +34,7 @@ func main() {
 
 	defer cancel()
 
-	dbpool, err := database.InitDB(ctx, cfg)
+	dbpool, err := database.New(ctx, cfg)
 	if err != nil {
 		logger.Fatal("failed to init db", zap.Error(err))
 	}
@@ -41,4 +42,22 @@ func main() {
 	logger.Info("successfully connected to db")
 
 	defer dbpool.Close()
+
+	// run migrations
+	err = database.RunMigrations(cfg)
+	if err != nil {
+		logger.Fatal("failed to run migrations", zap.Error(err))
+	}
+
+	logger.Info("successfully ran migrations")
+
+	srv := &http.Server{
+		Addr: ":" + cfg.Port,
+	}
+
+	logger.Info("server starting on :" + cfg.Port)
+
+	if err := srv.ListenAndServe(); err != nil {
+		logger.Fatal("server failed", zap.Error(err))
+	}
 }

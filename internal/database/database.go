@@ -9,9 +9,9 @@ import (
 	"github.com/nerfthisdev/backend-test-task/internal/config"
 )
 
-func InitDB(ctx context.Context, cfg config.Config) (*pgxpool.Pool, error) {
+func New(ctx context.Context, cfg config.Config) (*pgxpool.Pool, error) {
 	dburi := fmt.Sprintf(
-		"postgres://%s:%s@%s:%s/%s",
+		"postgres://%s:%s@%s:%s/%s?sslmode=disable",
 		cfg.DBUser,
 		cfg.DBPassword,
 		cfg.DBAddress,

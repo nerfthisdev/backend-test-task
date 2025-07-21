@@ -325,11 +325,11 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:{port} in env",
+	Host:             "localhost:3000",
 	BasePath:         "/api/v1",
 	Schemes:          []string{},
 	Title:            "Marketplace API",
-	Description:      "REST API for marketplace service",
+	Description:      "REST API for marketplace service port 3000 is default in .env",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

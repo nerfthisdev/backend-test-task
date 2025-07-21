@@ -67,10 +67,10 @@ definitions:
       username:
         type: string
     type: object
-host: localhost:{port} in env
+host: localhost:3000
 info:
   contact: {}
-  description: REST API for marketplace service
+  description: REST API for marketplace service port 3000 is default in .env
   title: Marketplace API
   version: "1.0"
 paths:

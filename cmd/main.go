@@ -20,9 +20,9 @@ const defaultTimeout = time.Second * 5
 
 // @title Marketplace API
 // @version 1.0
-// @description REST API for marketplace service
+// @description REST API for marketplace service port 3000 is default in .env
 // @BasePath /api/v1
-// @host localhost:{port} in env
+// @host localhost:3000
 func main() {
 	// init .env file
 	if err := godotenv.Load(); err != nil {

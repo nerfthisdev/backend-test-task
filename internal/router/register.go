@@ -2,10 +2,12 @@ package server
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 	"regexp"
 
 	"github.com/google/uuid"
+	"github.com/jackc/pgx/v5"
 	"golang.org/x/crypto/bcrypt"
 
 	"github.com/nerfthisdev/backend-test-task/internal/domain"
@@ -65,6 +67,14 @@ func (h *RegisterHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	if !isValidLogin(req.Login) || !isValidPassword(req.Password) {
 		http.Error(w, "invalid credentials", http.StatusBadRequest)
+		return
+	}
+
+	if _, err := h.users.GetByUsername(r.Context(), req.Login); err == nil {
+		http.Error(w, "user already exists", http.StatusConflict)
+		return
+	} else if !errors.Is(err, pgx.ErrNoRows) {
+		http.Error(w, "failed to check user", http.StatusInternalServerError)
 		return
 	}
 

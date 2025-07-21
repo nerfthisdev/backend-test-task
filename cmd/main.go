@@ -10,7 +10,7 @@ import (
 	"github.com/nerfthisdev/backend-test-task/internal/auth"
 	"github.com/nerfthisdev/backend-test-task/internal/config"
 	"github.com/nerfthisdev/backend-test-task/internal/database"
-	"github.com/nerfthisdev/backend-test-task/internal/logger"
+	"github.com/nerfthisdev/backend-test-task/internal/logging"
 	"github.com/nerfthisdev/backend-test-task/internal/repository"
 	server "github.com/nerfthisdev/backend-test-task/internal/router"
 	"go.uber.org/zap"
@@ -33,7 +33,7 @@ func main() {
 	cfg := config.InitConfig()
 
 	// init logger
-	logger := logger.GetLogger()
+	logger := logging.GetLogger()
 	logger.Info("successfully initialized logger")
 
 	// init context
@@ -63,7 +63,7 @@ func main() {
 	postsRepo := repository.NewPostRepository(dbpool)
 	tokenSvc := auth.NewJWTService(cfg)
 
-	router := server.NewRouter(usersRepo, postsRepo, tokenSvc)
+	router := server.NewRouter(usersRepo, postsRepo, tokenSvc, &logger)
 
 	srv := &http.Server{
 		Addr:    ":" + cfg.Port,

@@ -6,7 +6,14 @@
 
 ### Public API
 
-API доступен по адресу <https://vktest.nerfthis.space> (с http должен работать редирект)
+API доступен по адресу <https://vktest.nerfthis.space/api/v1> (с http должен работать редирект)
+
+Там уже есть mock данные, 5 юзеров и 25 объявлений.
+
+Один из пользователей для теста:
+
+Ledner4392
+password123
 
 Там я настроил все с помощью traefik, в том числе там доступна документация <https://vktest.nerfthis.space/swagger>
 

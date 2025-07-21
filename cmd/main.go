@@ -23,6 +23,9 @@ const defaultTimeout = time.Second * 5
 // @description REST API for marketplace service port 3000 is default in .env
 // @BasePath /api/v1
 // @host localhost:3000
+// @securityDefinitions.apikey XAuthToken
+// @in header
+// @name X-Auth-Token
 func main() {
 	// init .env file
 	if err := godotenv.Load(); err != nil {

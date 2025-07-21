@@ -36,6 +36,7 @@ type createAdRequest struct {
 // @Success 200 {object} domain.Post
 // @Failure 400 {string} string
 // @Failure 401 {string} string
+// @Security XAuthToken
 // @Router /ads [post]
 func (h *CreateAdHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	var req createAdRequest

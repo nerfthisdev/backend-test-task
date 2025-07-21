@@ -86,6 +86,11 @@
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "XAuthToken": []
+                    }
+                ],
                 "consumes": [
                     "application/json"
                 ],
@@ -312,6 +317,13 @@
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "XAuthToken": {
+            "type": "apiKey",
+            "name": "X-Auth-Token",
+            "in": "header"
         }
     }
 }

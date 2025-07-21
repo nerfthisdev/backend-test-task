@@ -92,6 +92,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "XAuthToken": []
+                    }
+                ],
                 "consumes": [
                     "application/json"
                 ],
@@ -318,6 +323,13 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "XAuthToken": {
+            "type": "apiKey",
+            "name": "X-Auth-Token",
+            "in": "header"
         }
     }
 }`

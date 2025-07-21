@@ -150,6 +150,8 @@ paths:
           description: Unauthorized
           schema:
             type: string
+      security:
+      - XAuthToken: []
       summary: Create ad
       tags:
       - ads
@@ -203,4 +205,9 @@ paths:
       summary: Register new user
       tags:
       - auth
+securityDefinitions:
+  XAuthToken:
+    in: header
+    name: X-Auth-Token
+    type: apiKey
 swagger: "2.0"

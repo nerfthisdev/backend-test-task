@@ -4,6 +4,21 @@
 
 Данный проект представляет собой REST API маркетплейса, написанный на Go и работающий в связке с базой данных PostgreSQL. Запуск осуществляется с помощью Docker Compose и утилиты `air` для hot reload разработки.
 
+### Public API
+
+API доступен по адресу <https://vktest.nerfthis.space> (или http)
+
+Там я настроил все с помощью traefik, в том числе там доступна документация <https://vktest.nerfthis.space/swagger>
+
+```yaml
+labels:
+  - "traefik.enable=true"
+  - "traefik.http.routers.marketplace.rule=Host(`vktest.nerfthis.space`)"
+  - "traefik.http.routers.marketplace.entrypoints=web,websecure"
+  - "traefik.http.routers.marketplace.tls.certresolver=le"
+  - "traefik.http.services.marketplace.loadbalancer.server.port=23356"
+```
+
 ### Сервисы
 
 - `db`: контейнер с PostgreSQL 15

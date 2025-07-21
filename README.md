@@ -6,7 +6,7 @@
 
 ### Public API
 
-API доступен по адресу <https://vktest.nerfthis.space> (или http)
+API доступен по адресу <https://vktest.nerfthis.space> (с http должен работать редирект)
 
 Там я настроил все с помощью traefik, в том числе там доступна документация <https://vktest.nerfthis.space/swagger>
 

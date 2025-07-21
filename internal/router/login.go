@@ -28,6 +28,15 @@ type loginResponse struct {
 	Token string `json:"token"`
 }
 
+// ServeHTTP authenticates the user and returns a token.
+// @Summary Login user
+// @Tags auth
+// @Accept json
+// @Produce json
+// @Param data body loginRequest true "credentials"
+// @Success 200 {object} loginResponse
+// @Failure 401 {string} string
+// @Router /login [post]
 func (h *LoginHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	var req loginRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {

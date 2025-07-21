@@ -12,6 +12,10 @@ type UserRepository struct {
 	db *pgxpool.Pool
 }
 
+func NewUserRepository(db *pgxpool.Pool) *UserRepository {
+	return &UserRepository{db: db}
+}
+
 func (r *UserRepository) Create(ctx context.Context, user domain.User) error {
 	query := `INSERT INTO users (guid, username, password)
 	VALUES ($1, $2, $3)`

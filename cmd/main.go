@@ -7,14 +7,22 @@ import (
 	"time"
 
 	"github.com/joho/godotenv"
+	"github.com/nerfthisdev/backend-test-task/internal/auth"
 	"github.com/nerfthisdev/backend-test-task/internal/config"
 	"github.com/nerfthisdev/backend-test-task/internal/database"
 	"github.com/nerfthisdev/backend-test-task/internal/logger"
+	"github.com/nerfthisdev/backend-test-task/internal/repository"
+	server "github.com/nerfthisdev/backend-test-task/internal/router"
 	"go.uber.org/zap"
 )
 
 const defaultTimeout = time.Second * 5
 
+// @title Marketplace API
+// @version 1.0
+// @description REST API for marketplace service
+// @BasePath /api/v1
+// @host localhost:{port} in env
 func main() {
 	// init .env file
 	if err := godotenv.Load(); err != nil {
@@ -51,8 +59,15 @@ func main() {
 
 	logger.Info("successfully ran migrations")
 
+	usersRepo := repository.NewUserRepository(dbpool)
+	postsRepo := repository.NewPostRepository(dbpool)
+	tokenSvc := auth.NewJWTService(cfg)
+
+	router := server.NewRouter(usersRepo, postsRepo, tokenSvc)
+
 	srv := &http.Server{
-		Addr: ":" + cfg.Port,
+		Addr:    ":" + cfg.Port,
+		Handler: router,
 	}
 
 	logger.Info("server starting on :" + cfg.Port)

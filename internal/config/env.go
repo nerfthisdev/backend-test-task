@@ -28,13 +28,13 @@ func InitConfig() Config {
 	accessTTL, _ := time.ParseDuration(getEnv("ACCESS_TOKEN_TTL", "15m"))
 	return Config{
 		PublicHost: getEnv("PUBLIC_HOST", "http://localhost"),
-		Port:       getEnv("PORT", "8080"),
+		Port:       getEnv("HTTP_PORT", "8080"),
 		DBUser:     getEnv("DB_USER", "postgres"),
 		DBPassword: getEnv("DB_PASSWORD", "postgres"),
 		DBAddress:  getEnv("DB_HOST", "db"),
 		DBPort:     getEnv("DB_PORT", "5432"),
 		DBName:     getEnv("DB_NAME", "taskdb"),
-		JWTSecret:  getEnv("JWT_SECRET", ""),
+		JWTSecret:  getEnv("JWT_SECRET", "abracadabra2222222000000"),
 		AccessTTL:  accessTTL,
 	}
 }

@@ -1,3 +1,4 @@
+basePath: /api/v1
 definitions:
   domain.Post:
     properties:
@@ -40,6 +41,18 @@ definitions:
       title:
         type: string
     type: object
+  server.loginRequest:
+    properties:
+      login:
+        type: string
+      password:
+        type: string
+    type: object
+  server.loginResponse:
+    properties:
+      token:
+        type: string
+    type: object
   server.registerRequest:
     properties:
       login:
@@ -54,8 +67,12 @@ definitions:
       username:
         type: string
     type: object
+host: localhost:{port} in env
 info:
   contact: {}
+  description: REST API for marketplace service
+  title: Marketplace API
+  version: "1.0"
 paths:
   /ads:
     get:
@@ -136,6 +153,31 @@ paths:
       summary: Create ad
       tags:
       - ads
+  /login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: credentials
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/server.loginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/server.loginResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      summary: Login user
+      tags:
+      - auth
   /register:
     post:
       consumes:

@@ -33,6 +33,8 @@ ACCESS_TOKEN_TTL=5m
 docker-compose up --build
 ```
 
+По умолчанию PostgreSQL в Docker создаёт базу только один раз при первом запуске volume, используя переменную POSTGRES_DB. Поэтому если хочется поменять название бд после то нужно удалить volumes
+
 ### Структура
 
 - `Dockerfile` — описание сборки Go-приложения

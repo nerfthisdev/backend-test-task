@@ -2,6 +2,7 @@ package config
 
 import (
 	"os"
+	"time"
 )
 
 func getEnv(key, fallback string) string {
@@ -20,10 +21,11 @@ type Config struct {
 	DBPort     string
 	DBName     string
 	JWTSecret  string
-	AccessTTL  string
+	AccessTTL  time.Duration
 }
 
 func InitConfig() Config {
+	accessTTL, _ := time.ParseDuration(getEnv("ACCESS_TOKEN_TTL", "15m"))
 	return Config{
 		PublicHost: getEnv("PUBLIC_HOST", "http://localhost"),
 		Port:       getEnv("PORT", "8080"),
@@ -33,6 +35,6 @@ func InitConfig() Config {
 		DBPort:     getEnv("DB_PORT", "5432"),
 		DBName:     getEnv("DB_NAME", "taskdb"),
 		JWTSecret:  getEnv("JWT_SECRET", ""),
-		AccessTTL:  getEnv("ACCESS_TOKEN_TTL", "15m"),
+		AccessTTL:  accessTTL,
 	}
 }

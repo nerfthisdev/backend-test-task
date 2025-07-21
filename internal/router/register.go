@@ -47,6 +47,15 @@ func isValidPassword(password string) bool {
 	return hasLetter && hasDigit
 }
 
+// ServeHTTP registers a new user.
+// @Summary Register new user
+// @Tags auth
+// @Accept json
+// @Produce json
+// @Param data body registerRequest true "credentials"
+// @Success 200 {object} registerResponse
+// @Failure 400 {string} string
+// @Router /register [post]
 func (h *RegisterHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	var req registerRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
